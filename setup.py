@@ -68,5 +68,10 @@ setup(name=find_meta("package"),
           'console_scripts': [
               'caspo=caspo.console.main:run',
           ]
-      }
+      },
+      install_requires=[
+        "joblib==0.11", "networkx==1.11", "numpy", "pandas==0.18.1",
+        "pydotplus==2.0.2", "pyparsing==2.2.0", "scikit-learn==0.19.0",
+        "scipy==0.19.1", "seaborn==0.8.1",
+      ]
     )
