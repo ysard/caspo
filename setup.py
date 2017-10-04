@@ -15,9 +15,12 @@
 # You should have received a copy of the GNU General Public License
 # along with caspo.  If not, see <http://www.gnu.org/licenses/>.
 # -*- coding: utf-8 -*-
+"""Installation module for Caspo program."""
 
+import os
+import codecs
+import re
 from setuptools import setup, find_packages
-import sys, os, codecs, re
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
@@ -26,8 +29,8 @@ def read(*parts):
     Build an absolute path from *parts* and and return the contents of the
     resulting file.  Assume UTF-8 encoding.
     """
-    with codecs.open(os.path.join(HERE, *parts), "rb", "utf-8") as f:
-        return f.read()
+    with codecs.open(os.path.join(HERE, *parts), "rb", "utf-8") as f_d:
+        return f_d.read()
 
 META_FILE = read(os.path.join("caspo", "__init__.py"))
 
@@ -43,35 +46,35 @@ def find_meta(meta):
         return meta_match.group(1)
     raise RuntimeError("Unable to find __{meta}__ string.".format(meta=meta))
 
-setup(name=find_meta("package"),
-      version=find_meta("version"),
-      description=find_meta("description"),
-      author=find_meta("author"),
-      author_email=find_meta("email"),
-      url=find_meta("url"),
-      license=find_meta("license"),
-      long_description=read("README.md"),
-      classifiers=["Intended Audience :: Science/Research",
-                   "Intended Audience :: Healthcare Industry",
-                   "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
-                   "Operating System :: OS Independent",
-                   "Programming Language :: Python :: 2.7",
-                   "Topic :: Scientific/Engineering :: Artificial Intelligence",
-                   "Topic :: Scientific/Engineering :: Bio-Informatics"
-                   ],
-                   # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
-      keywords='logical signaling networks systems biology answer set programming',
-      packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
-      include_package_data=True,
-      zip_safe=False,
-      entry_points={
-          'console_scripts': [
-              'caspo=caspo.console.main:run',
-          ]
-      },
-      install_requires=[
+setup(
+    name=find_meta("package"),
+    version=find_meta("version"),
+    description=find_meta("description"),
+    author=find_meta("author"),
+    author_email=find_meta("email"),
+    url=find_meta("url"),
+    license=find_meta("license"),
+    long_description=read("README.md"),
+    classifiers=[
+        "Intended Audience :: Science/Research",
+        "Intended Audience :: Healthcare Industry",
+        "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python :: 2.7",
+        "Topic :: Scientific/Engineering :: Artificial Intelligence",
+        "Topic :: Scientific/Engineering :: Bio-Informatics"
+    ],
+    # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
+    keywords='logical signaling networks systems biology answer set programming',
+    packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
+    include_package_data=True,
+    zip_safe=False,
+    entry_points={
+        'console_scripts': ['caspo=caspo.console.main:run'],
+    },
+    install_requires=[
         "joblib==0.11", "networkx==1.11", "numpy", "pandas==0.18.1",
         "pydotplus==2.0.2", "pyparsing==2.2.0", "scikit-learn==0.19.0",
         "scipy==0.19.1", "seaborn==0.8.1",
-      ]
-    )
+    ],
+)
